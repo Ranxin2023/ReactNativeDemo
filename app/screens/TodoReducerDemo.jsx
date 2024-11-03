@@ -1,12 +1,12 @@
 import React, {useState, useReducer}from 'react'
-import { Button, FlatList, SafeAreaView, StyleSheet, View, Text, TextInput } from 'react-native'
-
+import { Button, FlatList, SafeAreaView, StyleSheet, View, Text, TextInput,Dimensions} from 'react-native'
+const deviceWidth=Dimensions.get('window').width
 function todoReducer(todos, action){
     // console.log(`dispatch action type ${action.type}`)
     switch(action.type){
         case 'ADD_TODO':
             return [...todos, { id: Date.now(), text: action.payload }]
-        case "REMOVE_TODO":
+        case 'REMOVE_TODO':
             return todos.filter(todo=>todo.id !== action.payload)
         default:
             return todos
@@ -27,7 +27,7 @@ const TodoReducerScreen=()=>{
     }
     return(
         <SafeAreaView style={styles.container}>
-            <Text>To-do List</Text>
+            <Text style={styles.title}>To-do List</Text>
             <TextInput
             style={styles.input}
             placeholder='add a new task'
@@ -52,11 +52,13 @@ const styles=StyleSheet.create({
         flex: 1,
         padding: 20,
         backgroundColor: '#fff',
+        // width:"100%"
       },
       title: {
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 20,
+        marginTop:50
       },
       input: {
         borderColor: '#ddd',
