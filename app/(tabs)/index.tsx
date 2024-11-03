@@ -74,11 +74,13 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import FunctionalCounterScreen from '../screens/FunctionalCounterScreen'
 import CounterScreenClass from '../screens/FunctionalCounterScreen'
+import TodoReducerScreen from '../screens/TodoReducerDemo'
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
-      <FunctionalCounterScreen/>
+      {/* <FunctionalCounterScreen/> */}
       {/* <CounterScreenClass/> */}
+      <TodoReducerScreen/>
     </View>
   );
 };
