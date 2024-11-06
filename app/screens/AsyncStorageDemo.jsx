@@ -40,29 +40,38 @@ const AsyncStorageScreen=()=>{
         }
     }
     return (
-        <View style={{ padding: 20 }}>
+        <View style={styles.container}>
           <Text style={styles.title}>Enter your information:</Text>
-    
-          <TextInput
-            placeholder="Name"
-            value={name}
-            onChangeText={setName}
-            style={{ borderBottomWidth: 1, marginBottom: 10 }}
-          />
+          <View style={styles.userInputContainer}>
+
+            <Text style={styles.userInfo}>Name: </Text>
+            <TextInput
+                placeholder="Name"
+                value={name}
+                onChangeText={setName}
+                style={styles.userTextInput}
+            />
+          </View>
+          <View style={styles.userInputContainer}>
+            <Text style={styles.userInfo}>Age: </Text>
           <TextInput
             placeholder="Age"
             value={age}
             onChangeText={setAge}
             keyboardType="numeric"
-            style={{ borderBottomWidth: 1, marginBottom: 10 }}
-          />
+            style={styles.userTextInput}
+            />
           
+            </View>
+          <View style={styles.userInputContainer}>
+            <Text style={styles.userInfo}>Gender: </Text>
           <TextInput
             placeholder="Gender"
             value={gender}
             onChangeText={setGender}
-            style={{ borderBottomWidth: 1, marginBottom: 10 }}
-          />
+            style={styles.userTextInput}
+            />
+            </View>
     
           <Button title="Save Information" onPress={saveUserInfo} />
           <Text style={{ marginTop: 20 }}>Saved Info:</Text>
@@ -74,10 +83,30 @@ const AsyncStorageScreen=()=>{
       );
 }
 const styles=StyleSheet.create({
+    container:{
+        padding:20
+    },
     title:{
         fontSize:20,
         marginTop:40,
         fontWeight:'bold'
+    }, 
+    userInputContainer:{
+        flexDirection:'row',
+        marginTop:20,
+        alignItems:'left'
+    },
+    userTextInput:{
+        borderBottomWidth:1,
+        marginBottom:20,
+        fontSize:16,
+        width:300
+    },
+    userInfo:{
+        fontSize:16,
+        marginTop:5,
+        marginRight:10,
+        width:60
     }
 })
 export default AsyncStorageScreen
