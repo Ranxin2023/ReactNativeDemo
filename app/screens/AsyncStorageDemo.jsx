@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {View, StyleSheet, Text, TextInput, Button}from 'react-native'
+import {Button, StyleSheet, Text, TextInput, TouchableOpacity, TouchableHighlight, View}from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const AsyncStorageScreen=()=>{
     const [name, setName]=useState('')
@@ -29,6 +29,7 @@ const AsyncStorageScreen=()=>{
         loadPreferences()
     }, [])
     const saveUserInfo=async()=>{
+        console.log("saving info")
         try{
             await AsyncStorage.setItem('name', name)
             await AsyncStorage.setItem('age', age)
@@ -38,6 +39,18 @@ const AsyncStorageScreen=()=>{
         catch(error){
             console.error("error in storing the preference")
         }
+    }
+    const longSaveUserInfo=async()=>{
+        console.log("long saving info and do nothing")
+        // try{
+        //     await AsyncStorage.setItem('name', name)
+        //     await AsyncStorage.setItem('age', age)
+        //     await AsyncStorage.setItem('gender', gender)
+        //     console.log("successfully saving all the user info")
+        // }
+        // catch(error){
+        //     console.error("error in storing the preference")
+        // }
     }
     return (
         <View style={styles.container}>
@@ -73,7 +86,25 @@ const AsyncStorageScreen=()=>{
             />
             </View>
     
-          <Button title="Save Information" onPress={saveUserInfo} />
+          {/* <Button title="Save Information" onPress={saveUserInfo} /> */}
+          <TouchableOpacity
+          onPress={saveUserInfo}
+          onLongPress={longSaveUserInfo}
+          >
+            <View style={styles.submitButton}>
+                <Text style={styles.ButtonText}>Save Information</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableHighlight
+          underlayColor='#107500'
+          onPress={saveUserInfo}
+          style={styles.changeContextButton}
+          >
+            <View >
+                <Text style={styles.ButtonText}>Color Information</Text>
+            </View>
+          </TouchableHighlight>
+
           <Text style={{ marginTop: 20 }}>Saved Info:</Text>
           <Text>Name: {name}</Text>
           <Text>Age: {age}</Text>
@@ -107,6 +138,28 @@ const styles=StyleSheet.create({
         marginTop:5,
         marginRight:10,
         width:60
+    },
+    submitButton:{
+        width:300,
+        height:50, 
+        backgroundColor:'#1EA7B4',
+        borderRadius:30,
+        alignSelf:'center'
+    },
+    ButtonText:{
+        alignSelf:'center',
+        marginVertical:10,
+        color:'white',
+        fontSize:20,
+        fontWeight:'bold'
+    },
+    changeContextButton:{
+        width:300,
+        height:50, 
+        backgroundColor:'#751005',
+        borderRadius:30,
+        alignSelf:'center',
+        marginTop:30
     }
 })
 export default AsyncStorageScreen
