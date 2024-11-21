@@ -1,11 +1,10 @@
 import React from 'react';
 import {View}from 'react-native'
-import FunctionalCounterScreen from './app/screens/FunctionalCounterScreen';
+// import FunctionalCounterScreen from './app/screens/FunctionalCounterScreen';
+// import AppNavigator from "./app/AppNavigator"
 const App=()=>{
-    return (
-        <View style={{flex: 1}}>
-            <FunctionalCounterScreen/>
-        </View>
-    )
+    // return (
+    //     <AppNavigator/>
+    // )
 }
 export default App;

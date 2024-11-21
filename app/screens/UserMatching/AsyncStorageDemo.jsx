@@ -1,7 +1,11 @@
-import React, {useState, useEffect} from 'react'
-import {Button, StyleSheet, Text, TextInput, TouchableOpacity, TouchableHighlight, View}from 'react-native'
+import React, {useState, useEffect, useContext} from 'react'
+import {Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableHighlight, View}from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import EmailContext from './EmailContext';
+import { useNavigation } from 'expo-router';
 const AsyncStorageScreen=()=>{
+    const navigation=useNavigation()
+    const {email}=useContext(EmailContext)
     const [name, setName]=useState('')
     const [age, setAge]=useState(20)
     const [gender, setGender]=useState('')
@@ -28,6 +32,10 @@ const AsyncStorageScreen=()=>{
         }
         loadPreferences()
     }, [])
+    const navigateBack=async()=>{
+        saveUserInfo()
+        navigation.goBack()
+    }
     const saveUserInfo=async()=>{
         console.log("saving info")
         try{
@@ -53,7 +61,16 @@ const AsyncStorageScreen=()=>{
         // }
     }
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
+            <View style={styles.headerContainer}>
+                    <TouchableOpacity onPress={navigateBack} style={styles.backButton}>
+                        <Image
+                            source={require("../../../assets/images/backArrow.png")}
+                            style={styles.backArrow}
+                        />
+                    </TouchableOpacity>
+                    <Text style={styles.headerTitle}>Enter User Info</Text>
+                </View>
           <Text style={styles.title}>Enter your information:</Text>
           <View style={styles.userInputContainer}>
 
@@ -110,18 +127,41 @@ const AsyncStorageScreen=()=>{
           <Text>Age: {age}</Text>
           {/* <Text>Birthday: {birthday}</Text> */}
           <Text>Gender: {gender}</Text>
-        </View>
+          <Text>Email: {email}</Text>
+        </SafeAreaView>
       );
 }
 const styles=StyleSheet.create({
     container:{
         padding:20
     },
+    headerTitle: {
+        // fontFamily: 'Montserrat-SemiBold',
+        fontSize: 20,
+        fontWeight:'bold',
+        color: '#062236',
+        marginHorizontal:30,
+        // alignSelf:'center'
+    },
     title:{
         fontSize:20,
         marginTop:40,
         fontWeight:'bold'
     }, 
+    headerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 44,
+        marginBottom: 20,
+        marginHorizontal: 16,
+    },
+    backButton: {
+        marginRight: 52,
+    },
+    backArrow: {
+        width: 24,
+        height: 24,
+    },
     userInputContainer:{
         flexDirection:'row',
         marginTop:20,

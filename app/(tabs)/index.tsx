@@ -73,20 +73,27 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import FunctionalCounterScreen from '../screens/FunctionalCounterScreen'
-import CounterScreenClass from '../screens/FunctionalCounterScreen'
-import TodoReducerScreen from '../screens/TodoReducerDemo'
-import AsyncStorageScreen from '../screens/AsyncStorageDemo'
-const HomeScreen = () => {
+import TodoReducerScreen from '../screens/TodoReducerDemo';
+import AppNavigator from "../AppNavigator"
+import { EmailProvider } from '../screens/UserMatching/EmailContext';
+const HomeScreen=() =>{
   return (
-    <View style={styles.container}>
-      {/*
-       <FunctionalCounterScreen/> 
-       <CounterScreenClass/> 
-       <TodoReducerScreen/>
-      */}
-      <AsyncStorageScreen/>
-    </View>
-  );
+    <EmailProvider>
+      <AppNavigator/>
+
+    </EmailProvider>
+);
+  // return(
+
+  // <View style={styles.container}>
+  //     {/*
+  //      <FunctionalCounterScreen/> 
+  //      <CounterScreenClass/> 
+  //      <TodoReducerScreen/>
+  //     */}
+  //     <TodoReducerScreen/>
+  //   </View>
+  // )
 };
 
 const styles = StyleSheet.create({
@@ -96,5 +103,6 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
   },
 });
+
 
 export default HomeScreen;

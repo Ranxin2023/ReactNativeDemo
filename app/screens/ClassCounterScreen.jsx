@@ -7,6 +7,13 @@ class CounterScreenClass extends Component{
             count:0
         }
     }
+    startCounter=()=>{
+        
+    }
+    stopCounter=()=>{
+        clearInterval(this.interval)
+        console.log("counter stopped")
+    }
     componentDidMount(){
         this.interval=setInterval(()=>{
             setCount((prevCount)=>{
@@ -26,6 +33,7 @@ class CounterScreenClass extends Component{
             <View>
                 <Text>This is inside counter class</Text>
                 <Text>Count: {this.state.count}</Text>
+                <Button title="Stop Counter" onPress={this.stopCounter}></Button>
             </View>
         )
     }
